@@ -200,8 +200,9 @@
   <div id="levBar">
     <div class="lv-big"></div>
     <div class="lv-sub"></div>
+    <div class="lv-brands" id="lvBrands" style="display:none; margin-top:10px; display:flex; gap:8px; justify-content:center; flex-wrap:wrap"></div>
     <div class="lv-row">
-      <button class="pbtn next" id="lv5">▶ Auto-play 5 hubs</button>
+      <button class="pbtn next" id="lv5">🎯 First 5 hubs — proposed</button>
       <button class="pbtn back" id="lvNext">＋ Next hub — one more deal</button>
       <button class="pbtn back" id="lvReset">↺ Start over</button>
       <button class="pbtn exit" id="lvExit">✕ Exit</button>
@@ -234,6 +235,8 @@ const REACH = {"cand":[1152,3083,5638,5280,3025,3026,3537,296,4807,2416,2997,360
 const LOCS = [{"n":"Bellanduru","lat":12.92921,"lng":77.67704,"r":1.37,"cx":372,"apt":287,"res":172036,"i":30},{"n":"Arkavathy Layout","lat":13.06713,"lng":77.6219,"r":2.94,"cx":140,"apt":49,"res":101688,"i":40},{"n":"Whitefield","lat":12.96964,"lng":77.74974,"r":1.37,"cx":183,"apt":75,"res":89608,"i":1},{"n":"Haralur","lat":12.90449,"lng":77.66544,"r":1.23,"cx":101,"apt":60,"res":86196,"i":93},{"n":"Doddakannalli","lat":12.90824,"lng":77.69488,"r":1.22,"cx":154,"apt":66,"res":85564,"i":66},{"n":"Hoodi","lat":12.9919,"lng":77.7162,"r":1.7,"cx":162,"apt":105,"res":80600,"i":56},{"n":"Indiranagar","lat":12.97329,"lng":77.64047,"r":2.14,"cx":199,"apt":76,"res":77904,"i":29},{"n":"Marathahalli","lat":12.95526,"lng":77.69842,"r":1.96,"cx":158,"apt":85,"res":71592,"i":20},{"n":"Kadugodi","lat":12.99858,"lng":77.76097,"r":3.0,"cx":107,"apt":31,"res":70920,"i":58},{"n":"Varthur","lat":12.94065,"lng":77.74699,"r":1.19,"cx":81,"apt":48,"res":68848,"i":51},{"n":"Beguru","lat":12.87475,"lng":77.62273,"r":2.12,"cx":102,"apt":45,"res":64016,"i":77},{"n":"EPIP Zone","lat":12.97819,"lng":77.72465,"r":1.87,"cx":154,"apt":108,"res":63948,"i":85},{"n":"Panathur","lat":12.93515,"lng":77.70475,"r":1.0,"cx":125,"apt":70,"res":59156,"i":63},{"n":"Anjanapura","lat":12.86013,"lng":77.55406,"r":2.15,"cx":68,"apt":36,"res":59112,"i":32},{"n":"Balagere","lat":12.93772,"lng":77.72807,"r":1.81,"cx":102,"apt":42,"res":53920,"i":50},{"n":"Richmond Town","lat":12.96355,"lng":77.60159,"r":0.87,"cx":185,"apt":106,"res":52240,"i":83},{"n":"Yelahanka","lat":13.1007,"lng":77.59635,"r":2.94,"cx":104,"apt":28,"res":50912,"i":17},{"n":"Mahadevapura","lat":12.99124,"lng":77.68973,"r":1.64,"cx":93,"apt":55,"res":50056,"i":44},{"n":"C V Raman Nagar","lat":12.98565,"lng":77.66498,"r":1.76,"cx":113,"apt":56,"res":49408,"i":45},{"n":"Bommasandra","lat":12.81624,"lng":77.69161,"r":3.0,"cx":76,"apt":28,"res":46604,"i":53},{"n":"Koramangala","lat":12.93574,"lng":77.62408,"r":1.47,"cx":105,"apt":71,"res":46384,"i":11},{"n":"JP Nagar","lat":12.90969,"lng":77.58661,"r":1.69,"cx":91,"apt":32,"res":45892,"i":7},{"n":"Kothnur","lat":12.87425,"lng":77.58373,"r":1.86,"cx":57,"apt":21,"res":44560,"i":79},{"n":"Pattanduru Agrahara","lat":12.97848,"lng":77.73342,"r":1.36,"cx":67,"apt":24,"res":44556,"i":59},{"n":"HSR Layout","lat":12.91162,"lng":77.63886,"r":1.71,"cx":75,"apt":39,"res":43256,"i":31},{"n":"Kudlu","lat":12.88891,"lng":77.65557,"r":2.24,"cx":86,"apt":41,"res":40356,"i":75},{"n":"Frazer Town","lat":12.99759,"lng":77.61367,"r":0.97,"cx":208,"apt":157,"res":38172,"i":16},{"n":"Uttarahalli","lat":12.90557,"lng":77.54554,"r":1.98,"cx":76,"apt":43,"res":37368,"i":43},{"n":"Vasanth Nagar","lat":12.99217,"lng":77.59146,"r":0.89,"cx":81,"apt":22,"res":36508,"i":35},{"n":"Kasavanahalli","lat":12.89777,"lng":77.67451,"r":1.11,"cx":69,"apt":12,"res":36044,"i":103},{"n":"Hennur","lat":13.03708,"lng":77.64136,"r":2.11,"cx":68,"apt":17,"res":35636,"i":99},{"n":"Konanakunte","lat":12.87929,"lng":77.56975,"r":1.74,"cx":46,"apt":18,"res":34452,"i":86},{"n":"Horamavu","lat":13.02733,"lng":77.66015,"r":1.44,"cx":62,"apt":28,"res":32376,"i":72},{"n":"Yeswanthpur","lat":13.02218,"lng":77.55308,"r":1.13,"cx":41,"apt":20,"res":31772,"i":25},{"n":"Gottigere","lat":12.85653,"lng":77.58772,"r":1.59,"cx":45,"apt":11,"res":31520,"i":82},{"n":"BTM Layout","lat":12.914,"lng":77.61028,"r":1.75,"cx":67,"apt":27,"res":30036,"i":26},{"n":"Jakkur","lat":13.07847,"lng":77.60689,"r":1.44,"cx":50,"apt":2,"res":29720,"i":41},{"n":"Kempapura Agrahara","lat":12.97062,"lng":77.55538,"r":1.13,"cx":28,"apt":19,"res":29232,"i":92},{"n":"Gunjur","lat":12.92098,"lng":77.7361,"r":1.28,"cx":39,"apt":11,"res":28464,"i":48},{"n":"Halasuru","lat":12.97788,"lng":77.62467,"r":0.98,"cx":67,"apt":23,"res":28392,"i":55},{"n":"TC Palya","lat":13.02262,"lng":77.70573,"r":1.9,"cx":51,"apt":14,"res":27248,"i":98},{"n":"Challaghatta","lat":12.89607,"lng":77.454,"r":2.47,"cx":62,"apt":31,"res":25956,"i":73},{"n":"Mahalakshmi Layout","lat":13.01132,"lng":77.5447,"r":0.98,"cx":28,"apt":14,"res":24500,"i":87},{"n":"Chikka Banavara","lat":13.08038,"lng":77.50189,"r":2.33,"cx":32,"apt":8,"res":24084,"i":69},{"n":"Malleswaram","lat":13.00274,"lng":77.57033,"r":0.84,"cx":73,"apt":35,"res":23872,"i":2},{"n":"Lingarajapuram","lat":13.00939,"lng":77.62679,"r":0.93,"cx":244,"apt":219,"res":22784,"i":78},{"n":"Hebbal","lat":13.03822,"lng":77.5919,"r":1.5,"cx":30,"apt":17,"res":22140,"i":38},{"n":"Banashankari 6th Stage","lat":12.88492,"lng":77.51548,"r":2.3,"cx":33,"apt":4,"res":22024,"i":95},{"n":"Chikkanayakanahalli","lat":12.89234,"lng":77.6942,"r":1.39,"cx":32,"apt":4,"res":21184,"i":70},{"n":"Kengeri","lat":12.92297,"lng":77.48429,"r":1.59,"cx":39,"apt":13,"res":20764,"i":33},{"n":"RMV 2nd Stage","lat":13.03601,"lng":77.56953,"r":1.4,"cx":33,"apt":7,"res":20356,"i":37},{"n":"Carmelaram","lat":12.9112,"lng":77.70651,"r":1.12,"cx":30,"apt":7,"res":19996,"i":57},{"n":"Sahakaranagara","lat":13.06291,"lng":77.58588,"r":1.5,"cx":42,"apt":12,"res":19764,"i":39},{"n":"Huskur","lat":12.86077,"lng":77.7071,"r":3.0,"cx":32,"apt":1,"res":19004,"i":46},{"n":"Rajarajeshwari Nagar","lat":12.92744,"lng":77.51552,"r":1.88,"cx":36,"apt":14,"res":16912,"i":27},{"n":"Sulthanpalya","lat":13.02941,"lng":77.60469,"r":1.38,"cx":26,"apt":18,"res":15744,"i":65},{"n":"Hunasamaranahalli","lat":13.14401,"lng":77.61912,"r":2.71,"cx":26,"apt":1,"res":15032,"i":64},{"n":"Nagavara","lat":13.03746,"lng":77.6236,"r":1.32,"cx":17,"apt":7,"res":14996,"i":71},{"n":"Vidyaranyapura","lat":13.07664,"lng":77.55773,"r":1.87,"cx":35,"apt":12,"res":14712,"i":0},{"n":"Choodasandra","lat":12.89216,"lng":77.68038,"r":1.22,"cx":31,"apt":14,"res":13576,"i":90},{"n":"Shivajinagar","lat":12.98553,"lng":77.60545,"r":1.08,"cx":26,"apt":4,"res":13464,"i":4},{"n":"Jnana Bharathi","lat":12.94335,"lng":77.51123,"r":1.47,"cx":15,"apt":4,"res":12432,"i":28},{"n":"Jalahalli","lat":13.04645,"lng":77.54838,"r":1.61,"cx":23,"apt":5,"res":12268,"i":19},{"n":"Peenya","lat":13.03294,"lng":77.52733,"r":1.57,"cx":17,"apt":4,"res":11924,"i":76},{"n":"Vijaya Nagar","lat":12.9664,"lng":77.53541,"r":1.32,"cx":24,"apt":6,"res":11120,"i":10},{"n":"Jayanagar","lat":12.92927,"lng":77.58242,"r":1.2,"cx":25,"apt":10,"res":11060,"i":6},{"n":"Suryanagar Phase 2","lat":12.77315,"lng":77.68644,"r":2.56,"cx":17,"apt":0,"res":10200,"i":97},{"n":"Austin Town","lat":12.96127,"lng":77.61529,"r":1.1,"cx":34,"apt":20,"res":9656,"i":12},{"n":"Nagasandra","lat":13.04097,"lng":77.50043,"r":2.22,"cx":13,"apt":6,"res":9136,"i":100},{"n":"Chamarajapete","lat":12.95842,"lng":77.56292,"r":1.13,"cx":20,"apt":8,"res":7760,"i":8},{"n":"Nagarabhavi","lat":12.96642,"lng":77.51308,"r":1.89,"cx":25,"apt":16,"res":7672,"i":54},{"n":"Sulikunte","lat":12.88818,"lng":77.72922,"r":3.0,"cx":15,"apt":3,"res":7560,"i":49},{"n":"Gandhinagar","lat":12.97715,"lng":77.58003,"r":1.15,"cx":13,"apt":0,"res":7520,"i":5},{"n":"Baiyyappanahalli","lat":12.99634,"lng":77.65332,"r":0.97,"cx":13,"apt":1,"res":7316,"i":23},{"n":"Dr. Shivaram Karanth Layout","lat":13.10272,"lng":77.53005,"r":2.88,"cx":12,"apt":0,"res":7200,"i":94},{"n":"Sadashivanagar","lat":13.01102,"lng":77.58086,"r":0.82,"cx":16,"apt":5,"res":7000,"i":34},{"n":"Banashankari","lat":12.92782,"lng":77.55662,"r":1.48,"cx":15,"apt":4,"res":6844,"i":101},{"n":"Shanti Nagar","lat":12.95554,"lng":77.59243,"r":1.3,"cx":16,"apt":6,"res":6284,"i":3},{"n":"Kodati","lat":12.88726,"lng":77.7159,"r":1.21,"cx":11,"apt":1,"res":6152,"i":52},{"n":"Basavanagudi","lat":12.94173,"lng":77.5755,"r":0.83,"cx":30,"apt":23,"res":6120,"i":14},{"n":"Suryanagar Phase 3","lat":12.8046,"lng":77.75833,"r":3.0,"cx":10,"apt":0,"res":6000,"i":96},{"n":"KR Puram","lat":13.00752,"lng":77.69594,"r":1.3,"cx":8,"apt":0,"res":4520,"i":21},{"n":"Mulluru","lat":12.90487,"lng":77.72513,"r":0.8,"cx":7,"apt":0,"res":4200,"i":47},{"n":"Rajajinagar","lat":12.98823,"lng":77.55488,"r":1.3,"cx":10,"apt":4,"res":4012,"i":9},{"n":"Banaswadi","lat":13.01416,"lng":77.65185,"r":1.05,"cx":11,"apt":6,"res":3912,"i":24},{"n":"Kalyan Nagar","lat":13.02214,"lng":77.64034,"r":0.8,"cx":15,"apt":11,"res":3660,"i":42},{"n":"Suryanagar Phase 1","lat":12.79309,"lng":77.70004,"r":2.26,"cx":7,"apt":1,"res":3564,"i":68},{"n":"Basaveshwaranagar","lat":12.99376,"lng":77.53913,"r":1.14,"cx":9,"apt":4,"res":3192,"i":88},{"n":"HBR Layout","lat":13.03199,"lng":77.62808,"r":0.9,"cx":7,"apt":3,"res":3128,"i":81},{"n":"Mathikere","lat":13.03336,"lng":77.55818,"r":0.8,"cx":6,"apt":1,"res":3032,"i":18},{"n":"Ramamurthy Nagar","lat":13.01202,"lng":77.67778,"r":1.31,"cx":6,"apt":2,"res":2596,"i":22},{"n":"Herohalli","lat":12.99123,"lng":77.48701,"r":2.93,"cx":4,"apt":0,"res":2400,"i":80},{"n":"Nadaprabhu Kempegowda Layout","lat":12.91892,"lng":77.45188,"r":2.68,"cx":4,"apt":0,"res":2400,"i":102},{"n":"Sulikere","lat":12.93631,"lng":77.44946,"r":1.99,"cx":3,"apt":0,"res":1800,"i":74},{"n":"Chikkapete","lat":12.96978,"lng":77.57569,"r":1.14,"cx":3,"apt":2,"res":1572,"i":13},{"n":"RT Nagar","lat":13.02272,"lng":77.59571,"r":1.1,"cx":6,"apt":5,"res":1408,"i":15},{"n":"Kaval Byrasandra","lat":13.02002,"lng":77.60929,"r":1.14,"cx":4,"apt":2,"res":1372,"i":91}];   // {n, lat, lng, r, cx, apt, res, i}
 // per-locality capture requirement @1.5 km reach: {localityIdx: [acquireFor70pct, acquireFor90pct, maxCovPct]} — 13 means "12+"
 const CAPTURE = {"30":[1,7,100],"40":[2,5,98],"1":[1,2,100],"93":[1,1,100],"66":[1,1,98],"56":[1,2,100],"29":[2,2,100],"20":[2,3,98],"58":[2,3,98],"51":[1,1,97],"77":[2,4,97],"85":[1,2,98],"63":[1,1,100],"32":[1,4,99],"50":[2,2,99],"83":[1,1,100],"17":[3,5,98],"44":[1,2,100],"45":[2,2,98],"53":[2,3,100],"11":[3,3,97],"7":[2,2,99],"79":[4,5,100],"59":[1,2,99],"31":[3,3,100],"75":[2,4,97],"16":[1,2,98],"43":[1,2,100],"35":[1,1,100],"103":[1,1,98],"99":[1,5,100],"86":[2,3,100],"72":[4,4,100],"25":[2,2,100],"82":[1,2,100],"26":[2,3,98],"41":[1,2,98],"92":[1,1,98],"48":[1,2,98],"55":[1,1,100],"98":[5,5,98],"73":[1,3,100],"87":[1,1,100],"69":[2,3,100],"2":[1,1,100],"78":[1,1,100],"38":[1,1,100],"95":[2,3,97],"70":[1,1,97],"33":[1,3,97],"37":[1,2,97],"57":[1,2,100],"39":[2,2,100],"46":[2,3,100],"27":[2,3,100],"65":[1,1,100],"64":[2,4,100],"71":[1,1,100],"0":[2,5,100],"90":[1,1,98],"4":[1,3,100],"28":[1,1,100],"19":[1,2,100],"76":[1,1,100],"10":[1,3,100],"6":[2,3,100],"97":[2,3,100],"12":[1,2,100],"100":[1,2,100],"8":[1,1,100],"54":[3,3,100],"49":[2,3,100],"5":[1,1,100],"23":[1,1,100],"94":[2,2,100],"34":[1,1,100],"101":[1,3,100],"3":[1,1,100],"52":[1,1,100],"14":[1,1,100],"96":[2,3,100],"21":[1,1,100],"47":[1,1,100],"9":[1,1,100],"24":[1,1,100],"42":[1,1,100],"68":[2,3,100],"88":[2,2,98],"81":[1,1,100],"18":[1,1,100],"22":[2,2,100],"80":[1,2,100],"102":[1,2,100],"74":[2,2,100],"13":[2,2,100],"15":[1,1,100],"91":[2,2,100]};
+// proposed first 5 hubs — scored on residents + community density + tech-park access, centres >=4 km apart
+const HUBS5 = [{"n": "Bellanduru", "lat": 12.91414, "lng": 77.67809, "com": 565, "homes": 73602, "res": 294408, "parks": ["Embassy TechVillage", "RMZ Ecoworld", "RMZ Ecospace", "Prestige Tech Park"]}, {"n": "Pattanduru Agrahara", "lat": 12.97249, "lng": 77.74032, "com": 252, "homes": 36732, "res": 146928, "parks": ["ITPL", "Whitefield EPIP"]}, {"n": "Panathur", "lat": 12.94526, "lng": 77.70575, "com": 231, "homes": 30356, "res": 121424, "parks": ["Embassy TechVillage", "Prestige Tech Park"]}, {"n": "Shivajinagar", "lat": 12.98027, "lng": 77.60203, "com": 298, "homes": 27089, "res": 108356, "parks": []}, {"n": "Gunjur", "lat": 12.92581, "lng": 77.74032, "com": 136, "homes": 28016, "res": 112064, "parks": []}];
 const CTYPES = {
   a:{label:'Apartment complex', color:'#2563EB', icon:'🏢'},
   v:{label:'Villa community',  color:'#059669', icon:'🏡'},
@@ -981,20 +984,25 @@ function analyzeDrawn(poly){
 }
 document.getElementById('drawBtn').addEventListener('click', startDraw);
 
-// ================= LEVERAGE MODE — one deal, what it unlocks =================
-let levOn = false, levStuff = [], levPicks = [], levCovered = new Set(), levBusy = false;
+// ================= LEVERAGE MODE — hubs at the centre of demand =================
+let levOn = false, levStuff = [], levHubs = [], levCovered = new Set(), levBusy = false, levDeals = 0, levDealLabel = '';
 const levBar = document.getElementById('levBar');
-const LEV_R = 1.5; // operating reach per anchored community (km, straight-line approx)
+const HUB_R = 2.0;   // hub operating radius, km (~8 min by auto)
+const LEV_BRANDS = ['Sobha', 'Prestige', 'Brigade', 'Purva', 'Salarpuria', 'Mantri'];
 function levClear(){
   levStuff.forEach(o => o.setMap && o.setMap(null)); levStuff = [];
-  levPicks = []; levCovered = new Set();
+  levHubs = []; levCovered = new Set(); levDeals = 0; levDealLabel = '';
 }
 function levHint(){
-  levBar.querySelector('.lv-big').innerHTML = `<span class="lv-hint">Tap any community on the map.</span>`;
-  levBar.querySelector('.lv-sub').innerHTML = `Tap a community to see what <b>one deal</b> unlocks — or just press <b>▶ Auto-play 5 hubs</b> and watch five deals open five hubs across Bengaluru.`;
+  levBar.querySelector('.lv-big').innerHTML = `<span class="lv-hint">One deal. Watch the hubs open.</span>`;
+  levBar.querySelector('.lv-sub').innerHTML = `Press <b>🎯 First 5 hubs</b> to see our proposed launch sites — scored on residents, community density and tech-park access. Or make it <b>one deal</b>: pick a builder below and one partnership opens hubs across the city. A <b>hub is a Ridoo base at the centre of demand</b>; every community around it is a customer.`;
   document.getElementById('lvNext').style.display = 'none';
   document.getElementById('lvReset').style.display = 'none';
   document.getElementById('lv5').style.display = '';
+  const bd = document.getElementById('lvBrands');
+  bd.style.display = 'flex';
+  bd.innerHTML = LEV_BRANDS.map(x => `<button class="pbtn back" data-brand="${x}" style="padding:8px 13px;font-size:13px">${x}</button>`).join('');
+  bd.querySelectorAll('button').forEach(btn => btn.addEventListener('click', () => levBrandDeal(btn.dataset.brand)));
 }
 function enterLev(){
   if (!map || levOn) return;
@@ -1018,93 +1026,179 @@ function exitLev(){
   ['a','v'].forEach(t => { if (cxClusterers[t] && activeTab !== 'browse') cxClusterers[t].clearMarkers(); });
   setHexLayer(activeTab === 'city');
 }
-async function levPick(c){
-  if (levBusy) return; levBusy = true;
-  levPicks.push(c);
-  // star the deal
-  levStuff.push(new google.maps.Marker({position:{lat:c[1],lng:c[2]}, map, zIndex:9700,
-    icon:{path:google.maps.SymbolPath.CIRCLE, scale:13, fillColor:'#0f172a', fillOpacity:1, strokeColor:'#5eead4', strokeWeight:3},
-    label:{text:'★', color:'#5eead4', fontSize:'13px'}}));
-  // ripple ring
-  const ring = new google.maps.Circle({center:{lat:c[1],lng:c[2]}, radius:60, map, strokeColor:'#7C3AED', strokeOpacity:.9, strokeWeight:2.5, fillOpacity:0, zIndex:6});
-  levStuff.push(ring);
-  animateRadius(ring, LEV_R*1000, 900).then(() => { ring.setOptions({strokeOpacity:.35, strokeWeight:1.5}); });
-  // reach blob grows outward (hex cells sorted by distance)
-  const bh = [];
-  HEX.forEach((h,hi) => { const d = hav(c[1],c[2],h[0],h[1]); if (d <= LEV_R) bh.push([hi, d]); });
-  bh.sort((x,y) => x[1]-y[1]);
-  const poly = new google.maps.Polygon({paths: [], strokeWeight:0, fillColor:'#7C3AED', fillOpacity:.14, clickable:false, zIndex:3, map});
-  levStuff.push(poly);
-  for (let k = 1; k <= 10; k++){
-    poly.setPaths(bh.slice(0, Math.max(1, Math.ceil(bh.length*k/10))).map(o => hexPath(HEX[o[0]][0], HEX[o[0]][1])));
-    await sleep(40);
+// hub base = the CENTRE of demand near a point: hex centre (within 1.3 km) maximizing residents in HUB_R
+function bestHubCenter(lat, lng){
+  let best = {lat, lng}, bg = -1;
+  HEX.forEach(h => {
+    if (hav(lat, lng, h[0], h[1]) > 1.3) return;
+    let g = 0;
+    HEX.forEach(h2 => { if (hav(h[0], h[1], h2[0], h2[1]) <= HUB_R) g += h2[2]; });
+    if (g > bg){ bg = g; best = {lat: h[0], lng: h[1]}; }
+  });
+  return best;
+}
+async function levAddHub(center, dealC, opts){
+  const o = opts || {};
+  // hub base marker at the CENTRE (not a community)
+  levStuff.push(new google.maps.Marker({position: center, map, zIndex: 9800,
+    icon:{path: 'M 0,-13 11,-6.5 11,6.5 0,13 -11,6.5 -11,-6.5 Z', scale: 1, fillColor:'#0f172a', fillOpacity:1, strokeColor:'#5eead4', strokeWeight:2.5},
+    label:{text:'H', color:'#5eead4', fontSize:'12px', fontWeight:'700'}, title:'Ridoo hub — base at the centre of demand'}));
+  if (dealC){
+    levStuff.push(new google.maps.Marker({position:{lat:dealC[1], lng:dealC[2]}, map, zIndex:9600,
+      icon:{path:google.maps.SymbolPath.CIRCLE, scale:9, fillColor:'#D97706', fillOpacity:1, strokeColor:'#fff', strokeWeight:2},
+      label:{text:'★', color:'#fff', fontSize:'11px'}, title:'Seed deal: ' + dealC[0]}));
   }
-  // light up every community the fleet can now serve
+  const ring = new google.maps.Circle({center, radius:80, map, strokeColor:'#7C3AED', strokeOpacity:.9, strokeWeight:2.5, fillOpacity:0, zIndex:6});
+  levStuff.push(ring);
+  animateRadius(ring, HUB_R*1000, o.instant ? 1 : 800).then(() => ring.setOptions({strokeOpacity:.3, strokeWeight:1.4}));
+  // coverage blob = hex cells inside the hub radius, grown outward
+  const bh = [];
+  HEX.forEach((h,hi) => { const d = hav(center.lat, center.lng, h[0], h[1]); if (d <= HUB_R) bh.push([hi, d]); });
+  bh.sort((x,y) => x[1]-y[1]);
+  const poly = new google.maps.Polygon({paths: [], strokeWeight:0, fillColor:'#7C3AED', fillOpacity:.13, clickable:false, zIndex:3, map});
+  levStuff.push(poly);
+  const steps = o.instant ? 1 : 9;
+  for (let k = 1; k <= steps; k++){
+    poly.setPaths(bh.slice(0, Math.max(1, Math.ceil(bh.length*k/steps))).map(x => hexPath(HEX[x[0]][0], HEX[x[0]][1])));
+    if (!o.instant) await sleep(40);
+  }
+  // light EVERY apartment & villa the hub can serve — nothing left out
   const fresh = [];
-  CX.forEach((c2, ci) => { if (!levCovered.has(ci) && hav(c[1],c[2],c2[1],c2[2]) <= LEV_R){ levCovered.add(ci); fresh.push(c2); } });
-  const show = fresh.filter(f => f[4] >= 20).slice(0, 140);
+  CX.forEach((c2, ci) => { if (!levCovered.has(ci) && hav(center.lat, center.lng, c2[1], c2[2]) <= HUB_R){ levCovered.add(ci); fresh.push(c2); } });
+  const show = fresh.slice(0, 450);
   for (let k = 0; k < show.length; k++){
     const f = show[k];
-    levStuff.push(new google.maps.Marker({position:{lat:f[1],lng:f[2]}, map, zIndex:8800,
-      icon:{path:google.maps.SymbolPath.CIRCLE, scale:4.5, fillColor:'#5eead4', fillOpacity:.95, strokeColor:'#0f172a', strokeWeight:1}}));
-    if (k % 5 === 0) await sleep(16);
+    levStuff.push(new google.maps.Marker({position:{lat:f[1], lng:f[2]}, map, zIndex:8800,
+      icon:{path:google.maps.SymbolPath.CIRCLE, scale:3.6, fillColor: (o.gold && o.gold(f)) ? '#F59E0B' : '#5eead4', fillOpacity:.95, strokeColor:'#0f172a', strokeWeight:.8}}));
+    if (k % 12 === 0 && !o.instant) await sleep(12);
   }
-  // camera: fit the whole unlocked union
+  levHubs.push({center, deal: dealC || null});
+}
+function levFitAll(){
   const b = new google.maps.LatLngBounds();
-  levPicks.forEach(p => { b.extend({lat:p[1]+LEV_R/104, lng:p[2]+LEV_R/98}); b.extend({lat:p[1]-LEV_R/104, lng:p[2]-LEV_R/98}); });
-  map.fitBounds(b);
-  levUpdateBar();
-  levBusy = false;
+  levHubs.forEach(h => { b.extend({lat:h.center.lat + HUB_R/104, lng:h.center.lng + HUB_R/98}); b.extend({lat:h.center.lat - HUB_R/104, lng:h.center.lng - HUB_R/98}); });
+  if (levHubs.length) map.fitBounds(b);
 }
 function levUpdateBar(){
   let n = 0, units = 0, res = 0;
   levCovered.forEach(ci => { n++; units += CX[ci][4]; res += CX[ci][5]; });
   const cm = captainMath(units);
-  const deals = levPicks.length;
+  const hubs = levHubs.length;
+  const dealTxt = levDealLabel ? `1 deal — ${levDealLabel}` : `${levDeals} deal${levDeals > 1 ? 's' : ''}`;
   levBar.querySelector('.lv-big').innerHTML =
-    `<em>${deals} deal${deals > 1 ? 's' : ''} → ${deals} hub${deals > 1 ? 's' : ''}</em> · ${fmt(n)} communities · <em>~${fmt(res)}</em> residents`;
+    `<em>${dealTxt} → ${hubs} hub${hubs > 1 ? 's' : ''}</em> · ${fmt(n)} communities · <em>~${fmt(res)}</em> residents`;
   levBar.querySelector('.lv-sub').innerHTML =
-    `All servable by the <b>same anchored fleet</b> — ≈<b>${Math.max(1, Math.round(cm.captains))}</b> captains at ${Math.round(RIDOO.adoption*100)}% adoption (~${Math.round(cm.rides).toLocaleString('en-IN')} rides/day). Acquisition cost: <b>${deals} RWA handshake${deals > 1 ? 's' : ''}</b> — <b>one deal seeds one hub</b>. Press ＋ and the next deal opens the next hub in a new locality. Estimates from OpenStreetMap — verified at onboarding.`;
+    `Each <b>H</b> is a Ridoo hub base at the centre of demand (radius ~${HUB_R} km ≈ 8 min by auto) — every lit dot is a community it can serve. ≈<b>${Math.max(1, Math.round(cm.captains))}</b> captains at ${Math.round(RIDOO.adoption*100)}% adoption. Estimates from OpenStreetMap — verified at onboarding.`;
   document.getElementById('lvNext').style.display = '';
   document.getElementById('lvReset').style.display = '';
+  document.getElementById('lvBrands').style.display = 'none';
+}
+async function levPick(c){
+  if (levBusy) return; levBusy = true;
+  levDeals++;
+  const center = bestHubCenter(c[1], c[2]);
+  await levAddHub(center, c);
+  levFitAll();
+  levUpdateBar();
+  levBusy = false;
 }
 async function levAutoNext(){
-  if (levBusy || !levPicks.length) return false;
+  if (levBusy || !levHubs.length) return false;
   const GENERIC = /^(block|tower|wing|phase|bldg|building|apt|flat|no\.?|#)?\s*[-#]?\s*([a-z]|[0-9]{1,3}|[ivx]{1,4})?$/i;
   let best = null, bg = 0;
-  CX.forEach((c2, ci) => {
+  CX.forEach(c2 => {
     if (c2[4] < 100 || (c2[3] !== 'a' && c2[3] !== 'v')) return;
-    if (levPicks.some(p => p === c2)) return;
     const cn = cleanCxName(c2[0]);
     if (cn.length < 4 || GENERIC.test(cn)) return;
-    if (levPicks.some(p => hav(p[1],p[2],c2[1],c2[2]) < 5)) return; // NEW hub — different locality each time
-    let gain = 0;
-    CX.forEach((m, mi) => { if (!levCovered.has(mi) && hav(c2[1],c2[2],m[1],m[2]) <= LEV_R) gain += m[5]; });
-    if (gain > bg){ bg = gain; best = c2; }
+    if (levHubs.some(h => hav(h.center.lat, h.center.lng, c2[1], c2[2]) < 5)) return; // new hub territory
+    let g = 0;
+    CX.forEach((m, mi) => { if (!levCovered.has(mi) && hav(c2[1], c2[2], m[1], m[2]) <= HUB_R) g += m[5]; });
+    if (g > bg){ bg = g; best = c2; }
   });
   if (best){ await levPick(best); return true; }
-  levBar.querySelector('.lv-sub').innerHTML = 'No strong new-hub candidate left far enough from your current hubs. ↺ Start over to try another part of the city.';
+  levBar.querySelector('.lv-sub').innerHTML = 'No strong new-hub territory left near mapped demand. ↺ Start over to try another part of the city.';
   return false;
 }
 async function levAuto5(){
-  if (levBusy) return;
+  if (levBusy) return; levBusy = true;
+  levClear();
   document.getElementById('lv5').style.display = 'none';
-  if (!levPicks.length){
-    if (!pitchPicks) pitchPicks = computePicks(1).picks;
-    await levPick(pitchPicks[0].c);   // hub 1: the best anchor in the city
+  document.getElementById('lvBrands').style.display = 'none';
+  map.setZoom(11); map.setCenter({lat: 12.97, lng: 77.62});
+  await sleep(700);
+  for (let i = 0; i < HUBS5.length; i++){
+    const hb = HUBS5[i];
+    levBar.querySelector('.lv-big').innerHTML = `<em>Hub ${i+1} of 5</em> — ${esc(hb.n)}`;
+    levBar.querySelector('.lv-sub').innerHTML = `${fmt(hb.com)} communities · ~${fmt(hb.res)} residents within ${HUB_R} km · ` +
+      (hb.parks.length ? `serves ${hb.parks.join(', ')}` : `dense residential core`);
+    levBusy = false;
+    await levAddHubSeq(hb);
+    levBusy = true;
+    await sleep(750);
   }
-  while (levPicks.length < 5){
-    await sleep(1100);
-    const ok = await levAutoNext();
-    if (!ok) break;
-  }
-  levBar.querySelector('.lv-sub').innerHTML += ' <b style="color:#5eead4">Five handshakes did this.</b>';
+  levBusy = false;
+  levFitAll();
+  let n = 0, res = 0, units = 0;
+  levCovered.forEach(ci => { n++; res += CX[ci][5]; units += CX[ci][4]; });
+  const cm = captainMath(units);
+  levBar.querySelector('.lv-big').innerHTML = `<em>5 hubs — proposed launch</em> · ${fmt(n)} communities · <em>~${fmt(res)}</em> residents`;
+  levBar.querySelector('.lv-sub').innerHTML = `Sites scored on residents + community density + tech-park access; hub bases sit at the centre of demand, ≥4 km apart. Seeding: 1–2 community deals per hub, or one builder partnership below. ≈<b>${Math.max(1, Math.round(cm.captains))}</b> captains at ${Math.round(RIDOO.adoption*100)}% adoption.`;
+  document.getElementById('lvReset').style.display = '';
+  document.getElementById('lvNext').style.display = 'none';
 }
-document.getElementById('lv5').addEventListener('click', levAuto5);
+async function levAddHubSeq(hb){
+  if (levBusy) return; levBusy = true;
+  const center = {lat: hb.lat, lng: hb.lng};
+  await levAddHub(center, null);
+  levStuff.push(new google.maps.Marker({position:{lat: hb.lat - 0.008, lng: hb.lng}, map, zIndex: 9500,
+    icon:{path: google.maps.SymbolPath.CIRCLE, scale: 0},
+    label:{text: hb.n + ' hub', color:'#0f172a', fontSize:'12px', fontWeight:'700'}}));
+  levBusy = false;
+}
+async function levBrandDeal(brand){
+  if (levBusy) return; levBusy = true;
+  levClear();
+  document.getElementById('lv5').style.display = 'none';
+  document.getElementById('lvBrands').style.display = 'none';
+  levDeals = 1; levDealLabel = brand + ' partnership';
+  const rx = new RegExp('\\b' + brand, 'i');
+  const hits = CX.filter(c => rx.test(c[0]));
+  const isBrand = c => rx.test(c[0]);
+  levBar.querySelector('.lv-big').innerHTML = `<span class="lv-hint">One ${brand} partnership…</span>`;
+  levBar.querySelector('.lv-sub').innerHTML = `${brand} has <b>${hits.length}</b> communities across Bengaluru. One corporate MoU puts Ridoo inside all of them — the five strongest clusters become hub bases.`;
+  // flash every brand community city-wide
+  hits.forEach(h => levStuff.push(new google.maps.Marker({position:{lat:h[1], lng:h[2]}, map, zIndex:9100,
+    icon:{path:google.maps.SymbolPath.CIRCLE, scale:4.2, fillColor:'#F59E0B', fillOpacity:1, strokeColor:'#0f172a', strokeWeight:1}})));
+  map.setZoom(11); map.setCenter({lat: 12.97, lng: 77.62});
+  await sleep(1800);
+  // 5 hub bases: greedy over brand communities, hubs ≥3.5 km apart, centred on demand
+  const anchors = [];
+  for (let k = 0; k < 5; k++){
+    let best = null, bg = -1;
+    hits.forEach(c => {
+      if (anchors.some(a => a === c)) return;
+      if (levHubs.some(h => hav(h.center.lat, h.center.lng, c[1], c[2]) < 3.5)) return;
+      let g = 0;
+      HEX.forEach(h2 => { if (hav(c[1], c[2], h2[0], h2[1]) <= HUB_R) g += h2[2]; });
+      if (g > bg){ bg = g; best = c; }
+    });
+    if (!best) break;
+    anchors.push(best);
+    const center = bestHubCenter(best[1], best[2]);
+    await levAddHub(center, best, {gold: isBrand});
+    levUpdateBar();
+    await sleep(650);
+  }
+  levFitAll();
+  levUpdateBar();
+  levBar.querySelector('.lv-sub').innerHTML += ` <b style="color:#F59E0B">One deal. ${levHubs.length} hubs.</b> Gold dots = ${brand} communities (in the deal); teal dots = every other community those hubs can also serve.`;
+  levBusy = false;
+}
 document.getElementById('levBtn').addEventListener('click', enterLev);
 document.getElementById('lvExit').addEventListener('click', exitLev);
 document.getElementById('lvReset').addEventListener('click', () => { levClear(); levHint(); map.setZoom(12); map.setCenter({lat: 12.94, lng: 77.66}); });
 document.getElementById('lvNext').addEventListener('click', levAutoNext);
+document.getElementById('lv5').addEventListener('click', levAuto5);
 
 // ================= PITCH MODE — founder-controlled, 5 steps, 5 sentences =================
 let pitchOn = false, pitchStep = 0, pitchStuff = [], pitchBusy = false, pitchPicks = null;
