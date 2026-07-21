@@ -201,7 +201,8 @@
     <div class="lv-big"></div>
     <div class="lv-sub"></div>
     <div class="lv-row">
-      <button class="pbtn next" id="lvNext">＋ Next hub — one more deal</button>
+      <button class="pbtn next" id="lv5">▶ Auto-play 5 hubs</button>
+      <button class="pbtn back" id="lvNext">＋ Next hub — one more deal</button>
       <button class="pbtn back" id="lvReset">↺ Start over</button>
       <button class="pbtn exit" id="lvExit">✕ Exit</button>
     </div>
@@ -990,9 +991,10 @@ function levClear(){
 }
 function levHint(){
   levBar.querySelector('.lv-big').innerHTML = `<span class="lv-hint">Tap any community on the map.</span>`;
-  levBar.querySelector('.lv-sub').innerHTML = `Watch what <b>one deal</b> unlocks — every community a single anchored fleet can serve. Then press <b>＋</b> to stack the next deal. Search works too (Browse tab).`;
+  levBar.querySelector('.lv-sub').innerHTML = `Tap a community to see what <b>one deal</b> unlocks — or just press <b>▶ Auto-play 5 hubs</b> and watch five deals open five hubs across Bengaluru.`;
   document.getElementById('lvNext').style.display = 'none';
   document.getElementById('lvReset').style.display = 'none';
+  document.getElementById('lv5').style.display = '';
 }
 function enterLev(){
   if (!map || levOn) return;
@@ -1066,8 +1068,8 @@ function levUpdateBar(){
   document.getElementById('lvNext').style.display = '';
   document.getElementById('lvReset').style.display = '';
 }
-function levAutoNext(){
-  if (levBusy || !levPicks.length) return;
+async function levAutoNext(){
+  if (levBusy || !levPicks.length) return false;
   const GENERIC = /^(block|tower|wing|phase|bldg|building|apt|flat|no\.?|#)?\s*[-#]?\s*([a-z]|[0-9]{1,3}|[ivx]{1,4})?$/i;
   let best = null, bg = 0;
   CX.forEach((c2, ci) => {
@@ -1080,9 +1082,25 @@ function levAutoNext(){
     CX.forEach((m, mi) => { if (!levCovered.has(mi) && hav(c2[1],c2[2],m[1],m[2]) <= LEV_R) gain += m[5]; });
     if (gain > bg){ bg = gain; best = c2; }
   });
-  if (best) levPick(best);
-  else levBar.querySelector('.lv-sub').innerHTML = 'No strong new-hub candidate left far enough from your current hubs. ↺ Start over to try another part of the city.';
+  if (best){ await levPick(best); return true; }
+  levBar.querySelector('.lv-sub').innerHTML = 'No strong new-hub candidate left far enough from your current hubs. ↺ Start over to try another part of the city.';
+  return false;
 }
+async function levAuto5(){
+  if (levBusy) return;
+  document.getElementById('lv5').style.display = 'none';
+  if (!levPicks.length){
+    if (!pitchPicks) pitchPicks = computePicks(1).picks;
+    await levPick(pitchPicks[0].c);   // hub 1: the best anchor in the city
+  }
+  while (levPicks.length < 5){
+    await sleep(1100);
+    const ok = await levAutoNext();
+    if (!ok) break;
+  }
+  levBar.querySelector('.lv-sub').innerHTML += ' <b style="color:#5eead4">Five handshakes did this.</b>';
+}
+document.getElementById('lv5').addEventListener('click', levAuto5);
 document.getElementById('levBtn').addEventListener('click', enterLev);
 document.getElementById('lvExit').addEventListener('click', exitLev);
 document.getElementById('lvReset').addEventListener('click', () => { levClear(); levHint(); map.setZoom(12); map.setCenter({lat: 12.94, lng: 77.66}); });
