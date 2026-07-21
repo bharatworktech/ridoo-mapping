@@ -683,7 +683,7 @@ function buildWavePlan(){
           <span class="cov">${Math.round(p.cov*100)}%</span></div>`;
       });
     });
-    htmlOut += `<div class="note" style="border:0;padding:8px 4px 0">${picks.length} anchor communities → ${Math.round((picks.length ? picks[picks.length-1].cov : 0)*100)}% of estimated residents within a <b>${REACH.levels[LVL]}-minute drive on the real road network</b> (Dijkstra over 8.4 lakh OSM road nodes — turns, dead-ends and lakes included; no straight-line circles). Red hexes = populated gaps. <b>Anchors are the pilot communities per zone</b> — the playbook is pilot community → community cluster → open locality network, and captain counts are sized to full zone demand, not the anchor alone.</div>`;
+    htmlOut += `<div class="note" style="border:0;padding:8px 4px 0">${picks.length} anchor communities → ${Math.round((picks.length ? picks[picks.length-1].cov : 0)*100)}% of estimated residents within a <b>${REACH.levels[LVL]}-minute drive on the real road network</b> (Dijkstra over 8.4 lakh OSM road nodes — turns, dead-ends and lakes included; no straight-line circles). Red hexes = populated gaps. <b>Each zone = one future hub</b> (pilot community → cluster → open locality network). First 10 hubs = the 14-month build; the rest is mapped pipeline. Captain counts are sized to full hub demand, not the anchor alone.</div>`;
     out.innerHTML = htmlOut;
     out.querySelectorAll('.pickrow').forEach(el => el.addEventListener('click', () => {
       const p = picks[+el.dataset.i];
@@ -1062,7 +1062,7 @@ function levUpdateBar(){
   levBar.querySelector('.lv-big').innerHTML =
     `<em>${deals} deal${deals > 1 ? 's' : ''}</em> → ${fmt(n)} communities · <em>~${fmt(res)}</em> residents`;
   levBar.querySelector('.lv-sub').innerHTML =
-    `All servable by the <b>same anchored fleet</b> — ≈<b>${Math.max(1, Math.round(cm.captains))}</b> captains at ${Math.round(RIDOO.adoption*100)}% adoption (~${Math.round(cm.rides).toLocaleString('en-IN')} rides/day). Acquisition cost: <b>${deals} RWA handshake${deals > 1 ? 's' : ''}</b>. Estimates from OpenStreetMap — verified at onboarding.`;
+    `All servable by the <b>same anchored fleet</b> — ≈<b>${Math.max(1, Math.round(cm.captains))}</b> captains at ${Math.round(RIDOO.adoption*100)}% adoption (~${Math.round(cm.rides).toLocaleString('en-IN')} rides/day). Acquisition cost: <b>${deals} RWA handshake${deals > 1 ? 's' : ''}</b>. ${deals >= 2 ? 'This is one <b>hub</b> forming — a few deals, one fleet.' : '2–4 deals like this = one <b>hub</b>.'} Estimates from OpenStreetMap — verified at onboarding.`;
   document.getElementById('lvNext').style.display = '';
   document.getElementById('lvReset').style.display = '';
 }
@@ -1137,8 +1137,8 @@ const PITCH = [
      if (!instant) animateRadius(halo, 900, 1400).then(() => { if (halo.setMap) halo.setRadius(900); });
      else halo.setRadius(900);
    } },
- { main: `Phases 2–3: cluster nearby communities, then open the <span class="hl">whole locality</span>.`,
-   sub: `Community mornings fill the peaks (home → tech park). Then on-demand rides for everyone fill the rest of the day. One fleet, kept earning all day — that is the economic engine.`,
+ { main: `Cluster nearby communities, open the locality — that's <span class="hl">one hub</span>.`,
+   sub: `A hub = a few community deals + one anchored fleet. Community mornings fill the peaks (home → tech park); on-demand rides for the whole locality fill the rest of the day. One fleet, earning all day — that is the engine.`,
    run: async (instant) => {
      const p = pitchPicks[0]; const z12 = reachSet(p.ri, 1);
      map.fitBounds(hexesBounds(z12, 0.01));
@@ -1147,28 +1147,37 @@ const PITCH = [
      await growZonePitch(reachSet(p.ri, 0), '#0D9488', .30, true);
      pitchAnchor(p, '1');
    } },
- { main: `Phase 4: <span class="hl">repeat — in waves</span> — across the city.`,
+ { main: `<span class="hl">10 hubs in 14 months.</span> The rest of the map is pipeline.`,
    sub: `…`,
    run: async (instant) => {
      map.setZoom(11); map.setCenter({lat: 12.97, lng: 77.62});
      if (!instant){ await sleep(650); map.setZoom(11); map.setCenter({lat: 12.97, lng: 77.62}); }
-     const waves = [];
-     pitchPicks.forEach((p, i) => { const w = Math.floor(i/4); (waves[w] = waves[w] || []).push(p); });
-     for (let w = 0; w < waves.length && pitchOn; w++){
-       const color = WAVE_COLORS[w % WAVE_COLORS.length];
-       waves[w].forEach(p => pitchStuff.push(zonePoly(p.hexes, color, {fillOpacity: .24, zIndex: 3})));
-       const last = waves[w][waves[w].length - 1];
-       pbar.querySelector('.ps').innerHTML = `Wave ${w + 1} — <b style="color:#5eead4">${Math.round(last.cov * 100)}% of mapped residents</b> now inside a 12-minute road zone.`;
-       if (!instant) await sleep(w < 3 ? 650 : 280);
+     // first 10 = the 14-month build (bold, numbered); rest = faint mapped pipeline
+     for (let i = 0; i < Math.min(10, pitchPicks.length) && pitchOn; i++){
+       const p = pitchPicks[i];
+       const color = WAVE_COLORS[Math.floor(i/4) % WAVE_COLORS.length];
+       pitchStuff.push(zonePoly(p.hexes, color, {fillOpacity: .26, zIndex: 4}));
+       pitchStuff.push(new google.maps.Marker({position:{lat:p.c[1],lng:p.c[2]}, map, zIndex:9600,
+         icon:{path:google.maps.SymbolPath.CIRCLE, scale:11, fillColor:color, fillOpacity:1, strokeColor:'#fff', strokeWeight:2.5},
+         label:{text:String(i+1), color:'#fff', fontSize:'11px', fontWeight:'700'}}));
+       pbar.querySelector('.ps').innerHTML = `Hub ${i + 1} of 10 — <b style="color:#5eead4">${Math.round(p.cov * 100)}% of mapped residents</b> in reach.`;
+       if (!instant) await sleep(i < 4 ? 420 : 220);
      }
-     const fin = pitchPicks[pitchPicks.length - 1];
-     pbar.querySelector('.ps').innerHTML = `${pitchPicks.length} zones — each computed on the real road network — put <b style="color:#5eead4">${Math.round(fin.cov * 100)}% of ~31 lakh mapped residents</b> within a 12-minute drive.`;
+     if (!instant) await sleep(400);
+     for (let i = 10; i < pitchPicks.length; i++){
+       pitchStuff.push(zonePoly(pitchPicks[i].hexes, '#64748B', {fillOpacity: .07, zIndex: 3}));
+     }
+     const c10 = pitchPicks[Math.min(9, pitchPicks.length - 1)];
+     pbar.querySelector('.ps').innerHTML = `First <b style="color:#5eead4">10 hubs — the 14-month build</b> — put <b style="color:#5eead4">${Math.round(c10.cov * 100)}%</b> of ~31 lakh mapped residents within a 12-minute drive. The faint shapes are the mapped pipeline: ${pitchPicks.length - 10} more hub locations, ready when we scale.`;
    } },
  { main: `<span class="hl">Win one locality. Repeat. Connect. Scale.</span>`,
-   sub: `The locality math: <b style=\"color:#5eead4\">≈215 community partnerships capture ~90% of all 97 mapped localities</b> — out of 6,069. Reliable, professionally managed ride-hailing, built locality by locality. Live at mapping.goridoo.in.`,
+   sub: `Target: <b style="color:#5eead4">10 hubs in 14 months</b>. The locality math behind it: ≈215 community partnerships capture ~90% of all 97 mapped localities — out of 6,069. Reliable, professionally managed ride-hailing, built hub by hub.`,
    run: async () => {
      map.setZoom(11); map.setCenter({lat: 12.97, lng: 77.62});
-     pitchPicks.forEach((p, i) => { const w = Math.floor(i/4); pitchStuff.push(zonePoly(p.hexes, WAVE_COLORS[w % WAVE_COLORS.length], {fillOpacity: .2, zIndex: 3})); });
+     pitchPicks.forEach((p, i) => {
+       if (i < 10) pitchStuff.push(zonePoly(p.hexes, WAVE_COLORS[Math.floor(i/4) % WAVE_COLORS.length], {fillOpacity: .22, zIndex: 4}));
+       else pitchStuff.push(zonePoly(pitchPicks[i].hexes, '#64748B', {fillOpacity: .06, zIndex: 3}));
+     });
    } },
 ];
 async function renderPitchStep(i, instant){
