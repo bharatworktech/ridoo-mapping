@@ -201,7 +201,7 @@
     <div class="lv-big"></div>
     <div class="lv-sub"></div>
     <div class="lv-row">
-      <button class="pbtn next" id="lvNext">＋ Capture next best</button>
+      <button class="pbtn next" id="lvNext">＋ Next hub — one more deal</button>
       <button class="pbtn back" id="lvReset">↺ Start over</button>
       <button class="pbtn exit" id="lvExit">✕ Exit</button>
     </div>
@@ -1060,9 +1060,9 @@ function levUpdateBar(){
   const cm = captainMath(units);
   const deals = levPicks.length;
   levBar.querySelector('.lv-big').innerHTML =
-    `<em>${deals} deal${deals > 1 ? 's' : ''}</em> → ${fmt(n)} communities · <em>~${fmt(res)}</em> residents`;
+    `<em>${deals} deal${deals > 1 ? 's' : ''} → ${deals} hub${deals > 1 ? 's' : ''}</em> · ${fmt(n)} communities · <em>~${fmt(res)}</em> residents`;
   levBar.querySelector('.lv-sub').innerHTML =
-    `All servable by the <b>same anchored fleet</b> — ≈<b>${Math.max(1, Math.round(cm.captains))}</b> captains at ${Math.round(RIDOO.adoption*100)}% adoption (~${Math.round(cm.rides).toLocaleString('en-IN')} rides/day). Acquisition cost: <b>${deals} RWA handshake${deals > 1 ? 's' : ''}</b>. ${deals >= 2 ? 'This is one <b>hub</b> forming — a few deals, one fleet.' : '2–4 deals like this = one <b>hub</b>.'} Estimates from OpenStreetMap — verified at onboarding.`;
+    `All servable by the <b>same anchored fleet</b> — ≈<b>${Math.max(1, Math.round(cm.captains))}</b> captains at ${Math.round(RIDOO.adoption*100)}% adoption (~${Math.round(cm.rides).toLocaleString('en-IN')} rides/day). Acquisition cost: <b>${deals} RWA handshake${deals > 1 ? 's' : ''}</b> — <b>one deal seeds one hub</b>. Press ＋ and the next deal opens the next hub in a new locality. Estimates from OpenStreetMap — verified at onboarding.`;
   document.getElementById('lvNext').style.display = '';
   document.getElementById('lvReset').style.display = '';
 }
@@ -1075,13 +1075,13 @@ function levAutoNext(){
     if (levPicks.some(p => p === c2)) return;
     const cn = cleanCxName(c2[0]);
     if (cn.length < 4 || GENERIC.test(cn)) return;
-    if (!levPicks.some(p => hav(p[1],p[2],c2[1],c2[2]) <= 4.5)) return; // stay contiguous — same ops cluster
+    if (levPicks.some(p => hav(p[1],p[2],c2[1],c2[2]) < 5)) return; // NEW hub — different locality each time
     let gain = 0;
     CX.forEach((m, mi) => { if (!levCovered.has(mi) && hav(c2[1],c2[2],m[1],m[2]) <= LEV_R) gain += m[5]; });
     if (gain > bg){ bg = gain; best = c2; }
   });
   if (best) levPick(best);
-  else levBar.querySelector('.lv-sub').innerHTML = 'No stronger nearby deal left — this cluster is captured. ↺ Start over to try another part of the city.';
+  else levBar.querySelector('.lv-sub').innerHTML = 'No strong new-hub candidate left far enough from your current hubs. ↺ Start over to try another part of the city.';
 }
 document.getElementById('levBtn').addEventListener('click', enterLev);
 document.getElementById('lvExit').addEventListener('click', exitLev);
